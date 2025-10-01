@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>E-commerce Semi</title>
+<style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4;}
+    header { background:#4CAF50; color:white; padding:20px; text-align:center;}
+    h2 { color:#333;}
+    .category, .products { margin:20px; padding:20px; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+    .product { margin:10px 0;}
+    .product a { text-decoration:none; color:#4CAF50; font-weight:bold;}
+    button { padding:10px 15px; margin-top:10px; cursor:pointer;}
+    .map-container { display:flex; justify-content:center; margin:40px 0;}
+    iframe { border:0; width:80%; height:480px;}
+    footer { background:#333; color:white; text-align:center; padding:10px;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Negozio di Semi</h1>
+</header>
+
+<!-- Home: categorie -->
+<div id="home">
+    <div class="category">
+        <h2>Ortaggi</h2>
+        <button onclick="showProducts('Ortaggi')">Vedi prodotti</button>
+    </div>
+    <div class="category">
+        <h2>Piante Aromatiche</h2>
+        <button onclick="showProducts('Aromatiche')">Vedi prodotti</button>
+    </div>
+</div>
+
+<!-- Prodotti -->
+<div id="products" style="display:none;">
+    <button onclick="goHome()">← Torna alle categorie</button>
+    <div id="productList" class="products"></div>
+</div>
+
+<!-- Mappa -->
+<div class="map-container">
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1VurosCFWgjWu-6pahStOE8blSr4PK3I&ehbc=2E312F"></iframe>
+</div>
+
+<footer>
+    &copy; 2025 Negozio di Semi
+</footer>
+
+<script>
+const productData = {
+    Ortaggi: [
+        { nome: "Carote", link: "carote.html" },
+        { nome: "Porri", link: "#" }
+    ],
+    Aromatiche: [
+        { nome: "Salvia", link: "#" },
+        { nome: "Rosmarino", link: "#" }
+    ]
+};
+
+function showProducts(category) {
+    document.getElementById('home').style.display = 'none';
+    const list = document.getElementById('productList');
+    list.innerHTML = `<h2>${category}</h2>`; // titolo
+    productData[category].forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `<a href="${p.link}">${p.nome}</a>`;
+        list.appendChild(div);
+    });
+    document.getElementById('products').style.display = 'block';
+}
+
+function goHome() {
+    document.getElementById('products').style.display = 'none';
+    document.getElementById('home').style.display = 'block';
+}
+
+</script>
+
+</body>
+</html>
