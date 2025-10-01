@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Mappa Prodotti</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prodotti sulla Mappa</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        // Inizializza la mappa
+        const map = L.map('map').setView([41.9028, 12.4964], 5); // Italia
+
+        // Tile layer gratuito OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Lista dei prodotti
+        const prodotti = [
+            { nome: "Vino Toscano", lat: 43.7696, lon: 11.2558, link: "prodotto1.html" },
+            { nome: "Formaggio Parmigiano", lat: 44.4949, lon: 11.3426, link: "prodotto2.html" },
+            { nome: "Olive Liguri", lat: 44.4056, lon: 8.9463, link: "prodotto3.html" }
+        ];
+
+        // Aggiungi marker e popup
+        prodotti.forEach(prod => {
+            L.marker([prod.lat, prod.lon]).addTo(map)
+             .bindPopup(`<b>${prod.nome}</b><br><a href='${prod.link}'>Vedi prodotto</a>`);
+        });
+    </script>
+</body>
+</html>
